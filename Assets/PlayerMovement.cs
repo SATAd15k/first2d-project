@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (PlayerRB.velocity.y < -2)
             {
-                PlayerRB.velocity = new Vector2(PlayerRB.velocity.x, -200);
+                PlayerRB.velocity = new Vector2(PlayerRB.velocity.x, -20);
             }
         }
 
