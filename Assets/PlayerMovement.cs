@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Rigidbody2D PlayerRB;
+
+    // Void returns nothing
+    // Start Runs just before first frame
+    private void Start()
+    {
+        // Define PlayerRB variable as a rigidbody2d; 
+        PlayerRB = GetComponent<Rigidbody2D>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                Rigidbody2D PlayerRB = GetComponent<Rigidbody2D>();
+                PlayerRB = GetComponent<Rigidbody2D>();
 
                 PlayerRB.AddForce(Vector2.up * 200f);
             }
@@ -25,37 +34,60 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKey(KeyCode.LeftArrow) ||  Input.GetKey(KeyCode.S))
         {
-            Rigidbody2D PlayerRB = GetComponent<Rigidbody2D>();
+            PlayerRB = GetComponent<Rigidbody2D>();
 
-            PlayerRB.AddForce(Vector2.left * 20f);
+            PlayerRB.AddForce(Vector2.left * 2f);
 
             // Checking for x plane velocity; has to be a negative is moving left...
 
-            if (PlayerRB.velocity.x > -20)
+            /*if (PlayerRB.velocity.x > -2)
             {
-                PlayerRB.velocity = new Vector2(-20, PlayerRB.velocity.y);
-            }
+                PlayerRB.velocity = new Vector2(-2, PlayerRB.velocity.y);
+            }*/
         }
 
         // Move Right
 
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            Rigidbody2D PlayerRB = GetComponent<Rigidbody2D>();
+            PlayerRB = GetComponent<Rigidbody2D>();
 
-            PlayerRB.AddForce(Vector2.right * 20f);
+            PlayerRB.AddForce(Vector2.right * 2f);
 
-            if (PlayerRB.velocity.x > 20)
+            /*if (PlayerRB.velocity.x > 2)
             {
-                PlayerRB.velocity = new Vector2(20, PlayerRB.velocity.y);
+                PlayerRB.velocity = new Vector2(2, PlayerRB.velocity.y);
+            }*/
+        }
+
+        // Speed Limiter for x Plane
+        // Have to use an else if to separate the movement on both directions on x plane or it override if using ||
+
+        if (TryGetComponent<Rigidbody2D>(out PlayerRB))
+                {
+                    if (PlayerRB.velocity.x > 2)
+                        {
+                        PlayerRB.velocity = new Vector2(2, PlayerRB.velocity.y);
+                        }
+                    else if (PlayerRB.velocity.x < -2)
+                        {
+                        PlayerRB.velocity = new Vector2(-2, PlayerRB.velocity.y);
+                        }
+                }
+
+        // Speed Limiter for y Plane (test)
+
+        if (TryGetComponent<Rigidbody2D>(out PlayerRB))
+        {
+            if (PlayerRB.velocity.y > 2)
+            {
+                PlayerRB.velocity = new Vector2(PlayerRB.velocity.x, 2);
+            }
+            else if (PlayerRB.velocity.y < -2)
+            {
+                PlayerRB.velocity = new Vector2(PlayerRB.velocity.x, -200);
             }
         }
 
-        // Speed Limiter
-
-        if (Rigidbody2D PlayerRB =  GetComponent<Rigidbody2D>())
-                {
-                    
-                }
     }
 }
