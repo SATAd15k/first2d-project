@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; //Text meshpro import library
 
+//camelCase variables
+//PascalCase ClassNames, FunctionNames
+
 public class Health : MonoBehaviour
 {
-    TMP_Text healthText;
+    public TMP_Text HealthText;
 
 
     private int _health =100;
     private int _maxHealth = 100;
 
-    public void ODisplayHealth()
+    private void Start()
     {
-        if (healthText != null)
+        DisplayHealth();
+    }
+
+    public void DisplayHealth()
+    {
+        if (HealthText != null)
         {
-            healthText.text = "Health: " + _health;
+            HealthText.text = "Health: " + _health;
         }
     }
 
@@ -28,10 +36,12 @@ public class Health : MonoBehaviour
             // _health = 0;
             Destroy(gameObject);
         }
+        DisplayHealth();
     }
 
     public void HP(int heal)
     {
         _health = Mathf.Min(_maxHealth, _health + heal);
+        DisplayHealth();
     }
 }

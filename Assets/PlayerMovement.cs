@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D PlayerRB;
 
+    private bool _isGrounded = false;
+
     // Void returns nothing
     // Start Runs just before first frame
     private void Start()
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Move Left
 
-        if(Input.GetKey(KeyCode.LeftArrow) ||  Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.LeftArrow) ||  Input.GetKey(KeyCode.A))
         {
             PlayerRB = GetComponent<Rigidbody2D>();
 
@@ -92,4 +94,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        _isGrounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        _isGrounded = false;
+    }
+
 }
