@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         // Define PlayerRB variable as a rigidbody2d; 
         PlayerRB = GetComponent<Rigidbody2D>();
     }
+    
     // Update is called once per frame
     void Update()
     {
@@ -28,15 +29,15 @@ public class PlayerMovement : MonoBehaviour
         //Jump Function using either SPACE or UPARROW
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-            {
-                PlayerRB = GetComponent<Rigidbody2D>();
+        {
+            PlayerRB = GetComponent<Rigidbody2D>();
 
-                PlayerRB.AddForce(Vector2.up * 200f);
-            }
+            PlayerRB.AddForce(Vector2.up * 200f);
+        }
 
         // Move Left
 
-        if(Input.GetKey(KeyCode.LeftArrow) ||  Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow) ||  Input.GetKey(KeyCode.A))
         {
             PlayerRB = GetComponent<Rigidbody2D>();
 
@@ -68,16 +69,16 @@ public class PlayerMovement : MonoBehaviour
         // Have to use an else if to separate the movement on both directions on x plane or it override if using ||
 
         if (TryGetComponent<Rigidbody2D>(out PlayerRB))
-                {
-                    if (PlayerRB.velocity.x > 2)
-                        {
-                        PlayerRB.velocity = new Vector2(2, PlayerRB.velocity.y);
-                        }
-                    else if (PlayerRB.velocity.x < -2)
-                        {
-                        PlayerRB.velocity = new Vector2(-2, PlayerRB.velocity.y);
-                        }
-                }
+        {
+            if (PlayerRB.velocity.x > 2)
+            {
+                PlayerRB.velocity = new Vector2(2, PlayerRB.velocity.y);
+            }
+            else if (PlayerRB.velocity.x < -2)
+            {
+                PlayerRB.velocity = new Vector2(-2, PlayerRB.velocity.y);
+            }
+        }
 
         // Speed Limiter for y Plane (test)
 
@@ -92,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
                 PlayerRB.velocity = new Vector2(PlayerRB.velocity.x, -20);
             }
         }
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -104,5 +104,4 @@ public class PlayerMovement : MonoBehaviour
     {
         _isGrounded = false;
     }
-
 }
