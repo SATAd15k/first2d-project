@@ -1,3 +1,5 @@
+// aka bullect / projectile
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +7,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     public float Speed = 10f;
+    public int Damage = 50;
 
     // Start is called before the first frame update
     void Start()
